@@ -1,5 +1,19 @@
 # Learning-RxJS
 
+## **Table of contents**
+* [What is Observable](#what-is-an-observable)
+* [What is Subscription](#what-is-a-subscription)
+* [Operators](#operators)
+* [Pipe](#pipe)
+* [Operators catagories](#operators-catagories)
+  * [Creation](#creation-operators)
+  * [Combination](#combination-operators)
+  * [Error handling](#error-handling-operators)
+  * [Filtering](#filtering-operators)
+  * [Multicasting](#multicasting-operators)
+  * [Transformation](#transformation-operators)
+* [Operators with common behavior](#operators-with-common-behavior)
+
 ## What is an Observable?
 * An Observable represents a stream or source of data that can arrive over time.
 * Observables are cold or do not activate a producer until there is a subscription.
