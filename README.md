@@ -141,7 +141,7 @@ inputValue
  
 ## Operators catagories
 ### Creation Operators
-* The most commonly used creation operators: `of`, `from` and `fromEvent`
+* The most commonly used creation operators: [of](#of) | [from](#from) and [fromEvent](#fromevent)
 ### Combination operators
 * The most commonly used combination operators: `combineLatest`, `concat`, `merge`, `startWith` and `withLatestFrom`
 ### Error handling operators
@@ -157,3 +157,56 @@ inputValue
 * Switch based operators: `switchAll`, `switchMap`, `switchMapTo`
 * Concatation based operators: `concat`, `concatAll`, `concatMap`, `concatMapTo`
 * Merge based operators: `merge`, `mergeMap`, `mergeAll` 
+## Exploring operators
+### of
+* signature: `of(...values, scheduler: Scheduler): Observable`
+> Emit variable amount of values in a sequence and then emits a complete notification.
+* example:
+```javascript
+// RxJS v6+
+import { of } from 'rxjs';
+//emits any number of provided values in sequence
+const source1 = of(1, 2, 3, 4, 5);
+//output: 1,2,3,4,5
+const subscribe1 = source1.subscribe(val => console.log(val));
+//emits values of any type
+const source2 = of({ name: 'Brian' }, [1, 2, 3], function hello() {
+  return 'Hello';
+});
+//output: {name: 'Brian'}, [1,2,3], function hello() { return 'Hello' }
+const subscribe2 = source2.subscribe(val => console.log(val));
+```
+### from
+* signature: `from(ish: ObservableInput, mapFn: function, thisArg: any, scheduler: Scheduler): Observable`
+> Turn an array, promise or iterable into an observable
+* example
+```javascript
+// RxJS v6+
+import { from } from 'rxjs';
+
+//emit array as a sequence of values
+const arraySource = from([1, 2, 3, 4, 5]);
+//output: 1,2,3,4,5
+const subscribe = arraySource.subscribe(val => console.log(val));
+
+//emit result of promise
+const promiseSource = from(new Promise(resolve => resolve('Hello World!')));
+//output: 'Hello World'
+const subscribe = promiseSource.subscribe(val => console.log(val));
+
+//works on js collections
+const map = new Map();
+map.set(1, 'Hi');
+map.set(2, 'Bye');
+
+const mapSource = from(map);
+//output: [1, 'Hi'], [2, 'Bye']
+const subscribe = mapSource.subscribe(val => console.log(val));
+
+//emit string as a sequence
+const source = from('Hello World');
+//output: 'H','e','l','l','o',' ','W','o','r','l','d'
+const subscribe = source.subscribe(val => console.log(val));
+```
+
+### fromEvent
